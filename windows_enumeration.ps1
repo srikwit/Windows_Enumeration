@@ -2,7 +2,7 @@ $erroractionPreference="SilentlyContinue"
 foreach($drive in Get-PSDrive -PSProvider 'FileSystem' ){
     foreach($item in Get-ChildItem  -Recurse $drive.Root){
         $acl = Get-Acl $item.FullName -ErrorAction Stop
-        $acl_access = Get-Acl C:  | Select-Object -ExpandProperty Access
+        $acl_access = Get-Acl $item.FullName  | Select-Object -ExpandProperty Access
         $user_acl_result = ""
         foreach($i in $acl_access){
             $data = $i.AccessControlType,$i.FileSystemRights,$i.IdentityReference,$i.InheritanceFlags,$i.IsInherited,$i.PropagationFlags
